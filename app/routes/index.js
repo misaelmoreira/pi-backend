@@ -3,6 +3,7 @@ var HomeController = require('../controller/home_controller');
 var UsuariosController = require('../controller/usuarios_controller');
 var TutoresController = require('../controller/tutores_controller');
 var LoginUserController = require('../controller/loginUser_controller');
+var LoginTutorController = require('../controller/loginTutor_controller');
 var router = express.Router();
 
 /* GET home page. */
@@ -35,6 +36,10 @@ router.options('/tutores/:id.json', TutoresController.options);
 //router Login do Usuario
 router.head('/loginUser.json', LoginUserController.head);
 router.post('/loginUser.json', LoginUserController.autenticar);
+
+//router Login do Tutor
+router.head('/loginTutor.json', LoginTutorController.head);
+router.post('/loginTutor.json', LoginTutorController.autenticar);
 
 
 module.exports = router;
