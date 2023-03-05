@@ -1,9 +1,9 @@
 var db = require('../../config/db.js');
 
-var Login = function(login){
-    if(login != undefined){
-        this.login = usuario.login;
-        this.senha = usuario.senha;
+var LoginUser = function(loginUser){
+    if(loginUser != undefined){
+        this.login = loginUser.login;
+        this.senha = loginUser.senha;
     }
     else{
         this.login = "";
@@ -11,7 +11,7 @@ var Login = function(login){
     }      
 };
 
-Login.buscarPorLogin = function(login, senha, callback){
+LoginUser.buscarPorLogin = function(login, senha, callback){
     query = "SELECT * FROM `pi_backend`.Usuarios where login = '" + login + "' and senha = '" + senha + "';";
     db.cnn.exec(query, function(rows, err ){
         if(err !== undefined && err !== null){
@@ -40,4 +40,4 @@ Login.buscarPorLogin = function(login, senha, callback){
 };
 
 
-module.exports = Login;
+module.exports = LoginUser;

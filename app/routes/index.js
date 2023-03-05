@@ -2,7 +2,7 @@ var express = require('express');
 var HomeController = require('../controller/home_controller');
 var UsuariosController = require('../controller/usuarios_controller');
 var TutoresController = require('../controller/tutores_controller');
-var LoginController = require('../controller/login_controller');
+var LoginUserController = require('../controller/loginUser_controller');
 var router = express.Router();
 
 /* GET home page. */
@@ -32,9 +32,9 @@ router.patch('/tutores/:id.json', TutoresController.atualizarPorPatch);
 router.delete('/tutores/:id.json', TutoresController.excluirUsuario);
 router.options('/tutores/:id.json', TutoresController.options);
 
-//router Login
-router.head('/login.json', LoginController.head);
-router.post('/login.json', LoginController.autenticar);
+//router Login do Usuario
+router.head('/loginUser.json', LoginUserController.head);
+router.post('/loginUser.json', LoginUserController.autenticar);
 
 
 module.exports = router;

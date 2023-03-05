@@ -1,7 +1,7 @@
-var Login = require("../models/login");
+var LoginUser = require("../models/loginUser");
 var Token = require("../models/token");
 
-var LoginController = {
+var LoginUserController = {
   head: function (req, res, next) {
     new Token().criar(function (retorno) {
       res.header("auth_token", retorno.token);
@@ -29,7 +29,7 @@ var LoginController = {
                 }
 
                 if (req.body.login !== undefined ) {
-                  Login.buscarPorLogin(req.body.login, req.body.senha, function (retorno) {
+                  LoginUser.buscarPorLogin(req.body.login, req.body.senha, function (retorno) {
                     if (retorno.erro) {
                       res.status(500).send({
                         erro: "Erro ao autenticar usuarios - (" + retorno.mensagem + ")",
@@ -64,4 +64,4 @@ var LoginController = {
   },
 };
 
-module.exports = LoginController;
+module.exports = LoginUserController;
