@@ -9,37 +9,48 @@ var LoginController = {
     });
   },
   autenticar: function (req, res, next) {
+    var token = req.headers.auth_token;
+        Token.verificaToken(token, function(retorno){
+            if(retorno.tokenValidado){
+                Token.apagarToken(token); 
+                
+                if (!req.body.login) {
+                  res.status(400).send({
+                    erro: "erro ao autenticar usuario, login de usuário precisa estar preenchido",
+                  });
+                  return;
+                }
+            
+                if (!req.body.senha) {
+                  res.status(400).send({
+                    erro: "erro ao autenticar usuario, senha de usuário precisa estar preenchido",
+                  });
+                  return;
+                }
 
-    if (!req.body.login) {
-      res.status(400).send({
-        erro: "erro ao autenticar usuario, login de usuário precisa estar preenchido",
-      });
-      return;
-    }
-
-    if (!req.body.senha) {
-      res.status(400).send({
-        erro: "erro ao autenticar usuario, senha de usuário precisa estar preenchido",
-      });
-      return;
-    }
-
-    if (req.body.login !== undefined ) {
-      Login.buscarPorLogin(req.body.login, req.body.senha, function (retorno) {
-        if (retorno.erro) {
-          res.status(500).send({
-            erro: "Erro ao autenticar usuarios - (" + retorno.mensagem + ")",
-          });
-        } else {
-          res.status(200).send("Autenticado");
-        }
-      });
-    } else {
-      res.status(500).send({
-        erro: "erro ao autenticar usuario",
-      });
-      return;
-    }
+                if (req.body.login !== undefined ) {
+                  Login.buscarPorLogin(req.body.login, req.body.senha, function (retorno) {
+                    if (retorno.erro) {
+                      res.status(500).send({
+                        erro: "Erro ao autenticar usuarios - (" + retorno.mensagem + ")",
+                      });
+                    } else {
+                      res.status(200).send("Autenticado");
+                    }
+                  });
+                } else {
+                  res.status(500).send({
+                    erro: "erro ao autenticar usuario",
+                  });
+                  return;
+                }                
+            }
+            else{
+                res.status(401).send({
+                    erro: 'Token inválido, você não tem autorização de acessar esta API'
+                });
+            }
+        });     
   },
 
   options: function (req, res, next) {
