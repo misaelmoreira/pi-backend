@@ -35,7 +35,9 @@ var LoginTutorController = {
                         erro: "Erro ao autenticar Tutor - (" + retorno.mensagem + ")",
                       });
                     } else {
-                      res.status(200).send("Autenticado");
+                      res.status(200).send({
+                        data: retorno.tutores
+                      });
                     }
                   });
                 } else {

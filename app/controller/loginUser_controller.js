@@ -35,7 +35,9 @@ var LoginUserController = {
                         erro: "Erro ao autenticar usuarios - (" + retorno.mensagem + ")",
                       });
                     } else {
-                      res.status(200).send("Autenticado");
+                      res.status(200).send({
+                        data: retorno.usuarios
+                      });
                     }
                   });
                 } else {

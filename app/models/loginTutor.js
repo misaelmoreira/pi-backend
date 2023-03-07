@@ -18,20 +18,20 @@ LoginTutor.buscarPorLogin = function(login, senha, callback){
             callback.call(null, {
                 erro: true, 
                 mensagem: err.message, 
-                usuarios: []
+                tutores: []
             });
         }
         else{
             if(rows.length > 0){
                 callback.call(null, {
                 erro: false, 
-                usuarios: rows
+                tutores: rows
                 });
             }
             else{
                 callback.call(null, {
                     erro: true, 
-                    usuarios: [],
+                    tutores: [],
                     mensagem: "Tutor nao encontrado, tente novamente",
                 });
             }                    
